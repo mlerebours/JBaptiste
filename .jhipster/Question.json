@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "dicteeid",
+            "otherEntityName": "dictee",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "word"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "word",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "soundfile",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170923192407",
+    "javadoc": "Wrods table and sound file",
+    "entityTableName": "question",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

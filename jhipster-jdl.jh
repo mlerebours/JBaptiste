@@ -1,0 +1,20 @@
+/** Table dictee for a new set of words */
+entity Dictee {
+	id Integer,
+    name String,
+    dictee_date LocalDate
+}
+
+/** Wrods table and sound file */
+entity Question {
+	word String,
+    sound_file String
+}
+
+
+relationship ManyToMany {
+	Dictee{word} to Question{dictee_id}
+}
+
+// Set service options to all except few
+service all with serviceImpl

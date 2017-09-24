@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "dictee_id",
+            "relationshipName": "word",
+            "otherEntityName": "question",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dicteedate",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20170923192406",
+    "javadoc": "Table dictee for a new set of words",
+    "entityTableName": "dictee",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl"
+}

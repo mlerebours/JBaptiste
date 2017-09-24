@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="modo (generated)" id="1506257360209-1">
+        <addForeignKeyConstraint baseColumnNames="dictees_id" baseTableName="dictee_id" constraintName="FK8nudf4fmik2amyowif8pbsaqr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="dictee"/>
+    </changeSet>
+    <changeSet author="modo (generated)" id="1506257360209-2">
+        <addForeignKeyConstraint baseColumnNames="ids_id" baseTableName="dictee_id" constraintName="FKlit33dfpc0omhy1ifxrh8sahr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="question"/>
+    </changeSet>
+    <changeSet author="modo (generated)" id="1506257360209-3">
+        <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="jhi_user_authority" constraintName="FK290okww5jujghp4el5i7mgwu0" referencedColumnNames="id" referencedTableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="modo (generated)" id="1506257360209-4">
+        <dropForeignKeyConstraint baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m"/>
+        <addForeignKeyConstraint baseColumnNames="event_id" baseTableName="jhi_persistent_audit_evt_data" constraintName="FK2ehnyx2si4tjd2nt4q7y40v8m" referencedColumnNames="event_id" referencedTableName="jhi_persistent_audit_event"/>
+    </changeSet>
+    <changeSet author="modo (generated)" id="1506257360209-5">
+        <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc"/>
+        <addForeignKeyConstraint baseColumnNames="authority_name" baseTableName="jhi_user_authority" constraintName="FK4psxl0jtx6nr7rhqbynr6itoc" referencedColumnNames="name" referencedTableName="jhi_authority"/>
+    </changeSet>
+</databaseChangeLog>
