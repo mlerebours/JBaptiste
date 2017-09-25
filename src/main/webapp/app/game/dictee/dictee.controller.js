@@ -5,13 +5,16 @@
         .module('jBaptisteApp')
         .controller('GameDicteeController', DicteeController);
 
-    DicteeController.$inject = ['Dictee'];
+    DicteeController.$inject = ['GameDictee'];
 
-    function DicteeController(Dictee) {
+    function DicteeController(GameDictee) {
 
         var vm = this;
 
-        vm.dictees = [];
+        vm.dictees = GameDictee.query();
+        vm.dictees.$promise.then(function(data) {
+               console.log(data);
+           });
 
         vm.question = question;
         vm.points = 0;
@@ -55,11 +58,16 @@
         };
 
         vm.nextWord = function() {
-            var word = words[Math.floor(Math.random()*words.length)];
-            vm.question.answer = '';
-            vm.question.word = word;
-            vm.question.sound = word + ".mp3";
-            vm.readWord();
+
+            vm.dictees = GameDictee.query();
+            vm.dictees.$promise.then(function(data) {
+                   console.log(data);
+                    vm.question.answer = '';
+                    vm.question.word = data.word;
+                    vm.question.sound = data.word + ".mp3";
+                    vm.readWord();
+                   });
+
         };
 
         vm.nextWord();

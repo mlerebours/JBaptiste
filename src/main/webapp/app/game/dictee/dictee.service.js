@@ -2,15 +2,15 @@
     'use strict';
     angular
         .module('jBaptisteApp')
-        .factory('Dictee', Dictee);
+        .factory('GameDictee', GameDictee);
 
-    Dictee.$inject = ['$resource'];
+    GameDictee.$inject = ['$resource'];
 
-    function Dictee ($resource) {
-        var resourceUrl =  'api/dictees/:id';
+    function GameDictee ($resource) {
+        var resourceUrl =  'api/game/dictee/question?dicteeId=1';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true},
+            'query': { method: 'GET', isArray: false},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
