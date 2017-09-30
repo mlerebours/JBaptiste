@@ -148,3 +148,5 @@ jhipster:
 # ===================================================================
 
 application:
+    audio:
+        folder: Z:\Java_webapps\audio_files\mp3\

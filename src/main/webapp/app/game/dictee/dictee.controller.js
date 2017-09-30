@@ -5,9 +5,9 @@
         .module('jBaptisteApp')
         .controller('GameDicteeController', DicteeController);
 
-    DicteeController.$inject = ['GameDictee'];
+    DicteeController.$inject = ['GameDictee', '$http'];
 
-    function DicteeController(GameDictee) {
+    function DicteeController(GameDictee, $http) {
 
         var vm = this;
 
@@ -53,8 +53,28 @@
         };
 
         vm.readWord = function() {
-            var audio = new Audio('content/audio/words/' + vm.question.sound);
+//            var player = new MediaElementPlayer('audio-player', {
+//                                //options
+//                     });
+
+            var audio = new Audio("/api/sound/play?word=" + vm.question.word);
+            //"/api/sound/play/biberon.mp3");//
             audio.play();
+
+
+//            $http.get("/api/sound/play?word=" + vm.question.word)
+//                .then(function(response) {
+//                    player.pause();
+//                    player.setSrc(response.data);
+//                    player.load();
+//                    player.play();
+//
+//                    //var audio = new Audio(response.data);
+//                    //audio.play();
+//                });
+//
+            //var audio = new Audio('content/audio/words/' + vm.question.sound);
+            //audio.play();
         };
 
         vm.nextWord = function() {

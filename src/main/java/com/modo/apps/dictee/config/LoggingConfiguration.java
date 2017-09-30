@@ -39,17 +39,14 @@ public class LoggingConfiguration {
 
     private final String serverPort;
 
-    private final EurekaInstanceConfigBean eurekaInstanceConfigBean;
-
     private final String version;
 
     private final JHipsterProperties jHipsterProperties;
 
     public LoggingConfiguration(@Value("${spring.application.name}") String appName, @Value("${server.port}") String serverPort,
-        EurekaInstanceConfigBean eurekaInstanceConfigBean, JHipsterProperties jHipsterProperties, @Value("${info.project.version}") String version) {
+        JHipsterProperties jHipsterProperties, @Value("${info.project.version}") String version) {
         this.appName = appName;
         this.serverPort = serverPort;
-        this.eurekaInstanceConfigBean = eurekaInstanceConfigBean;
         this.jHipsterProperties = jHipsterProperties;
         this.version = version;
         if (jHipsterProperties.getLogging().getLogstash().isEnabled()) {

@@ -138,3 +138,5 @@ jhipster:
 # ===================================================================
 
 application:
+    audio:
+        folder: /var/services/homes/modo/Java_webapps/audio_files/mp3

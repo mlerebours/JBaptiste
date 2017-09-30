@@ -3,6 +3,7 @@ package com.modo.apps.dictee.service.impl;
 import com.modo.apps.dictee.service.DicteeService;
 import com.modo.apps.dictee.domain.Dictee;
 import com.modo.apps.dictee.repository.DicteeRepository;
+import com.modo.apps.dictee.service.QuestionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,11 @@ public class DicteeServiceImpl implements DicteeService{
     private final Logger log = LoggerFactory.getLogger(DicteeServiceImpl.class);
 
     private final DicteeRepository dicteeRepository;
+    private final QuestionService questionService;
 
-    public DicteeServiceImpl(DicteeRepository dicteeRepository) {
+    public DicteeServiceImpl(DicteeRepository dicteeRepository, QuestionService questionService) {
         this.dicteeRepository = dicteeRepository;
+        this.questionService = questionService;
     }
 
     /**
