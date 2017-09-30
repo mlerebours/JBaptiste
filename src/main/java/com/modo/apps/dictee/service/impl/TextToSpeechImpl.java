@@ -4,7 +4,6 @@ import com.modo.apps.dictee.config.ApplicationProperties;
 import com.modo.apps.dictee.service.TextToSpeech;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,12 +42,11 @@ public class TextToSpeechImpl implements TextToSpeech {
 
 
     private String runPythonConverter(String word) throws Exception {
-        URL resource = TextToSpeechImpl.class.getResource("/Python/text_to_mp3.py");
-        File file = Paths.get(resource.toURI()).toFile();
+        String script = applicationProperties.getPython().getFolder() + "text_to_mp3.py";
 
         String outputFolder = applicationProperties.getAudio().getFolder(); //"C:\\_SRC\\JBaptiste\\src\\main\\webapp\\content\\audio";
 
-        String target = "Python " + file.getAbsolutePath() + " -o" + outputFolder + " -w" + word;
+        String target = applicationProperties.getPython().getName() + " " + script + " -o" + outputFolder + " -w" + word;
         log.info(target);
         Runtime rt = Runtime.getRuntime();
 

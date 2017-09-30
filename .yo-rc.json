@@ -17,7 +17,7 @@
     "prodDatabaseType": "mariadb",
     "searchEngine": false,
     "messageBroker": false,
-    "serviceDiscoveryType": "eureka",
+    "serviceDiscoveryType": false,
     "buildTool": "maven",
     "enableSocialSignIn": false,
     "enableSwaggerCodegen": false,
