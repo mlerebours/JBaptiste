@@ -4,7 +4,7 @@
     angular
         .module('jBaptisteApp')
         .constant('VERSION', "0.0.2-SNAPSHOT")
-        .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1506767026446)
+        .constant('DEBUG_INFO_ENABLED', true)
+        .constant('BUILD_TIMESTAMP', "")
 ;
 })();

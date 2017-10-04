@@ -5,16 +5,30 @@
         .module('jBaptisteApp')
         .controller('GameDicteeController', DicteeController);
 
-    DicteeController.$inject = ['GameDictee', '$http'];
+    DicteeController.$inject = ['GameDictee', 'Dictee', '$http'];
 
-    function DicteeController(GameDictee, $http) {
+    function DicteeController(GameDictee, Dictee, $http) {
 
         var vm = this;
 
-        vm.dictees = GameDictee.query();
-        vm.dictees.$promise.then(function(data) {
-               console.log(data);
-           });
+        vm.dicteeId = 0;
+
+        loadAll();
+
+        function loadAll() {
+            Dictee.query(function(result) {
+                vm.dictees = result;
+                vm.dicteeId = vm.dictees[vm.dictees.length -1].id;
+                vm.searchQuery = null;
+                vm.loadDictee();
+            });
+        }
+
+        vm.loadDictee = function() {
+            console.log("dictee id = " + vm.dicteeId);
+            vm.nextWord();
+        };
+
 
         vm.question = question;
         vm.points = 0;
@@ -53,41 +67,21 @@
         };
 
         vm.readWord = function() {
-//            var player = new MediaElementPlayer('audio-player', {
-//                                //options
-//                     });
-
-            var audio = new Audio("/api/sound/play?word=" + vm.question.word);
-            //"/api/sound/play/biberon.mp3");//
-            audio.play();
-
-
-//            $http.get("/api/sound/play?word=" + vm.question.word)
-//                .then(function(response) {
-//                    player.pause();
-//                    player.setSrc(response.data);
-//                    player.load();
-//                    player.play();
-//
-//                    //var audio = new Audio(response.data);
-//                    //audio.play();
-//                });
-//
-            //var audio = new Audio('content/audio/words/' + vm.question.sound);
-            //audio.play();
+            if (vm.question.word) {
+                var audio = new Audio("/api/sound/play?word=" + vm.question.word);
+                audio.play();
+            }
         };
 
         vm.nextWord = function() {
 
-            vm.dictees = GameDictee.query();
-            vm.dictees.$promise.then(function(data) {
+            GameDictee.get(vm.dicteeId, function(data) {
                    console.log(data);
                     vm.question.answer = '';
                     vm.question.word = data.word;
                     vm.question.sound = data.word + ".mp3";
                     vm.readWord();
                    });
-
         };
 
         vm.nextWord();
@@ -99,32 +93,5 @@
         answer: '',
         correct: false
     };
-
-    var words = [
-        'poire',
-        'oiseau',
-        'voiture',
-        'poisson',
-        'balançoire',
-        'voisine',
-        'étoile',
-        'soir',
-        'voici',
-        'voilà',
-        'bois',
-        'roi',
-        'moelle',
-        'il voit',
-        'noix',
-        'noyau',
-        'joyeux',
-        'royaume',
-        'wapiti',
-        'boîte',
-        'aquarium',
-        'douane',
-        'zouave',
-        'poêle'
-    ]
 
 })();
