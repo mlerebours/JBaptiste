@@ -46,6 +46,7 @@ spring:
         password:
     thymeleaf:
         cache: true
+    contextPath: /j-baptiste
 
 liquibase:
     contexts: prod
@@ -126,7 +127,7 @@ jhipster:
 
 application:
     audio:
-        folder: /var/services/homes/modo/Java_webapps/audio_files/mp3/
+        folder: /volume1/Tomcat/audio_files/mp3/
     python:
         name: python3
-        folder: /var/services/homes/modo/Java_webapps/python_scripts/
+        folder: /volume1/Tomcat/python_scripts/

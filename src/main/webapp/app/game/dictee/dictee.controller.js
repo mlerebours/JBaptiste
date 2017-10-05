@@ -68,7 +68,7 @@
 
         vm.readWord = function() {
             if (vm.question.word) {
-                var audio = new Audio("/api/sound/play?word=" + vm.question.word);
+                var audio = new Audio("api/sound/play?word=" + vm.question.word);
                 audio.play();
             }
         };
