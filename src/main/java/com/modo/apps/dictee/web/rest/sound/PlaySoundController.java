@@ -60,10 +60,10 @@ public class PlaySoundController {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of dictees in body
      */
-    @GetMapping(value = "/play", produces = {"audio/mpeg"})
+    @GetMapping(value = "/play/{word}/", produces = {"audio/mpeg"})
     @Timed
-    public ResponseEntity<byte[]> sendMp3File(String word) {
-        log.debug("REST request file for word " + word);
+    public ResponseEntity<byte[]> sendMp3File(@PathVariable String word) {
+        log.info("REST request file for word " + word);
         Path path = Paths.get(applicationProperties.getAudio().getFolder() + word + ".mp3");
         try {
             byte[] bytes = Files.readAllBytes(path);
@@ -81,18 +81,18 @@ public class PlaySoundController {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of dictees in body
      */
-    @GetMapping(value = "/play/{word}.mp3", produces = {"audio/mpeg"})
+    @GetMapping(value = "/play", produces = {"audio/mpeg"})
     @Timed
-    public ResponseEntity<byte[]> sendMp3File2(@PathVariable String word) {
-        log.debug("REST request file for word " + word);
-        Path path = Paths.get("C:\\_SRC\\JBaptiste\\src\\main\\webapp\\content\\audio\\words\\" + word + ".mp3");
+    public ResponseEntity<byte[]> sendMp3File2(String file) {
+        log.info("REST request sound file " + file);
+        Path path = Paths.get(applicationProperties.getAudio().getFolder() + file);
         try {
             byte[] bytes = Files.readAllBytes(path);
             HttpHeaders headers = new HttpHeaders();
             ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, headers, HttpStatus.OK);
             return responseEntity;
         } catch (IOException e) {
-            log.error("Read file error for " + word, e);
+            log.error("Read file error for " + file, e);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

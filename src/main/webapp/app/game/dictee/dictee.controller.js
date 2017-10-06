@@ -68,7 +68,7 @@
 
         vm.readWord = function() {
             if (vm.question.word) {
-                var audio = new Audio("api/sound/play?word=" + vm.question.word);
+                var audio = new Audio("api/sound/play?file=" + vm.question.sound);
                 audio.play();
             }
         };
@@ -79,7 +79,7 @@
                    console.log(data);
                     vm.question.answer = '';
                     vm.question.word = data.word;
-                    vm.question.sound = data.word + ".mp3";
+                    vm.question.sound = data.soundfile;
                     vm.readWord();
                    });
         };

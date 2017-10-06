@@ -2,6 +2,8 @@ package com.modo.apps.dictee.service.impl;
 
 import com.modo.apps.dictee.config.ApplicationProperties;
 import com.modo.apps.dictee.service.TextToSpeech;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.text.Normalizer;
 
 /**
  * Service Implementation for managing Dictee.
@@ -44,13 +47,19 @@ public class TextToSpeechImpl implements TextToSpeech {
     private String runPythonConverter(String word) throws Exception {
         String script = applicationProperties.getPython().getFolder() + "text_to_mp3.py";
 
-        String outputFolder = applicationProperties.getAudio().getFolder(); //"C:\\_SRC\\JBaptiste\\src\\main\\webapp\\content\\audio";
+        String outputFolder = applicationProperties.getAudio().getFolder();
+        String fileName = stripAccents(word) + ".mp3";
 
-        String target = applicationProperties.getPython().getName() + " " + script + " -o" + outputFolder + " -w" + word;
-        log.info(target);
+        String[] cmdarray = {applicationProperties.getPython().getName()
+            , script
+            , "-o", outputFolder
+            , "-f", fileName
+            , "-w", word};
+        log.info(StringUtils.join(cmdarray, " "));
+
         Runtime rt = Runtime.getRuntime();
+        Process proc = rt.exec(cmdarray);
 
-        Process proc = rt.exec(target);
         InputStream is = proc.getInputStream();
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader buff = new BufferedReader (isr);
@@ -64,8 +73,15 @@ public class TextToSpeechImpl implements TextToSpeech {
         int exitVal = proc.waitFor();
         log.info("Process exitValue: " + exitVal);
         if (0 == exitVal) {
-            return word + ".mp3";
+            return fileName;
         }
         return null;
+    }
+
+    public static String stripAccents(String word) {
+        String s = Normalizer.normalize(word, Normalizer.Form.NFD);
+        s = s.replaceAll(" ","_");
+        s = s.replaceAll("[\\p{InCOMBINING_DIACRITICAL_MARKS}]","");
+        return s;
     }
 }
