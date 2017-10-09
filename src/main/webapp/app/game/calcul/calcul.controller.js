@@ -49,8 +49,16 @@
                 return;
             }
 
-            //vm.question.answer = vm.question.word.toUpperCase() + " " + vm.question.answer.toUpperCase();
-            vm.question.correct = vm.question.result == vm.question.answer;
+            var result = 0;
+            if (vm.operation === "+") {
+                result = vm.question.num1 + vm.question.num2;
+            } else if (vm.operation === "-") {
+                result = vm.question.num1 - vm.question.num2;
+            } else if (vm.operation === "x") {
+                result = vm.question.num1 * vm.question.num2;
+            }
+
+            vm.question.correct = result == vm.question.answer;
 
             vm.total += 1;
             vm.finished = vm.total === 10;
@@ -80,16 +88,12 @@
 
             vm.question.num1 = num1;
             vm.question.num2 = num2;
-            if (vm.operation === "+") {
-                vm.question.result = vm.question.num1 + vm.question.num2;
-            } else if (vm.operation === "-") {
+            if (vm.operation === "-") {
                 vm.question.num1 = Math.max(num1, num2);
                 vm.question.num2 = Math.min(num1, num2);
-                vm.question.result = vm.question.num1 - vm.question.num2;
-            } else if (vm.operation === "x") {
-                vm.question.result = vm.question.num1 * vm.question.num2;
             }
             vm.question.answer = '';
+            console.log(vm.question);
         };
 
         vm.nextWord();
@@ -98,7 +102,6 @@
     var question = {
         num1: 4,
         num2: 3,
-        result: 7,
         answer: '',
         correct: false
     };
