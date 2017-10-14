@@ -33,6 +33,7 @@
         vm.question = question;
         vm.points = 0;
         vm.total = 0;
+        vm.nb_questions = 10;
         vm.finished = false;
 
         vm.restart = function() {
@@ -52,7 +53,7 @@
             vm.question.correct = vm.question.word.toUpperCase() === vm.question.answer.toUpperCase();
 
             vm.total += 1;
-            vm.finished = vm.total === 10;
+            vm.finished = vm.total == vm.nb_questions;
 
             if (vm.question.correct) {
                 vm.points += 1;

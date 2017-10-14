@@ -135,7 +135,7 @@ jhipster:
 
 application:
     audio:
-        folder: Z:\Java_webapps\audio_files\mp3\
+        folder: C:\temp\audio_files\mp3\
     python:
         name: Python
         folder: C:\_SRC\JBaptiste\Python\

@@ -29,6 +29,7 @@
         vm.question = question;
         vm.points = 0;
         vm.total = 0;
+        vm.nb_questions = 10;
         vm.finished = false;
         var d = new Date();
         vm.start = d.getTime();
@@ -61,7 +62,7 @@
             vm.question.correct = result == vm.question.answer;
 
             vm.total += 1;
-            vm.finished = vm.total === 10;
+            vm.finished = vm.total == vm.nb_questions;
 
             if (vm.question.correct) {
                 vm.points += 1;
