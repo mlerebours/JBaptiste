@@ -11,7 +11,7 @@
 
     <groupId>com.modo.apps.dictee</groupId>
     <artifactId>j-baptiste</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>J Baptiste</name>
 
